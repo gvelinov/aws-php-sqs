@@ -1,0 +1,12 @@
+{
+    "name": "joro/aws-sqs-push-php",
+    "require": {
+        "aws/aws-sdk-php": "^3.67"
+    },
+    "authors": [
+        {
+            "name": "Georgi Velinov",
+            "email": "g.l.velinov@gmail.com"
+        }
+    ]
+}
