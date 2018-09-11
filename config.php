@@ -1,7 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: joro
- * Date: 11/09/18
- * Time: 23:37
- */
+return [
+    'client' => [
+        'profile' => 'default',
+        'region' => 'eu-west-1',
+        'version' => 'latest',
+    ],
+    'queueUrl' => ''
+];

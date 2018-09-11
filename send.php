@@ -1,13 +1,8 @@
 <?php
 include "vendor/autoload.php";
+$config = include "config.php";
 
 use Aws\Sqs\SqsClient;
-
-$config = [
-    'region' => 'eu-west-1',
-    'version' => 'latest',
-    'profile' => 'default',
-];
 
 $params = [
     'DelaySeconds' => 5,
@@ -18,10 +13,10 @@ $params = [
         ]
     ],
     'MessageBody' => isset($argv[2]) ? $argv[2] : "Information about current NY Times fiction bestseller",
-    'QueueUrl' => 'https://sqs.eu-west-1.amazonaws.com/515764178588/php-sdk-test'
+    'QueueUrl' => $config['queueUrl']
 ];
 
-$sqs = new SqsClient($config);
+$sqs = new SqsClient($config['client']);
 
 try {
     $result = $sqs->sendMessage($params);

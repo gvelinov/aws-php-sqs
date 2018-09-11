@@ -1,21 +1,16 @@
 <?php
 include "vendor/autoload.php";
+$config = include "config.php";
 
 use Aws\Sqs\SqsClient;
 
-$queueUrl = "https://sqs.eu-west-1.amazonaws.com/515764178588/php-sdk-test";
-
-$client = new SqsClient([
-    'profile' => 'default',
-    'region' => 'eu-west-1',
-    'version' => 'latest'
-]);
+$client = new SqsClient($config['client']);
 
 try {
     $result = $client->receiveMessage([
         'MaxNumberOfMessages' => 1,
         'MessageAttributeNames' => ['All'],
-        'QueueUrl' => $queueUrl, // REQUIRED
+        'QueueUrl' => $config['queueUrl'], // REQUIRED
         'WaitTimeSeconds' => 0,
     ]);
 
@@ -27,7 +22,7 @@ try {
         echo "\nDeleting..." . PHP_EOL;
 
         $client->deleteMessage([
-            'QueueUrl' => $queueUrl, // REQUIRED
+            'QueueUrl' => $config['queueUrl'], // REQUIRED
             'ReceiptHandle' => $result->get('Messages')[0]['ReceiptHandle'] // REQUIRED
         ]);
 
